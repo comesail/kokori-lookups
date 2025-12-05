@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Kokori · Butter → Gram Converter</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Fonts: Inter + Outfit -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<!-- SCHEMA: Google recognizes this as a TOOL (SoftwareApplication) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Butter Gram Converter",
+  "applicationCategory": "Calculator",
+  "operatingSystem": "All",
+  "description": "Interactive tool that converts common butter measurements into grams using standard reference averages.",
+  "url": "https://yourdomain.com/lookups/butter",
+  "creator": {
+    "@type": "Organization",
+    "name": "Kokori"
+  }
+}
+</script>
+
+<style>
+  :root {
+    --ink: #22201c;
+    --muted: #4c4740;
+    --line-soft: rgba(0,0,0,0.10);
+    --accent: #f5a623;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    color: var(--ink);
+    font-family: "Inter", sans-serif;
+  }
+
+  .mini-wrap {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 28px 0 16px;
+  }
+
+  /* TITLE */
+  .mini-title {
+    font-family: "Outfit", sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  /* INSTRUCTIONS */
+  .mini-instructions {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 22px;
+  }
+
+  .label {
+    font-family: "Outfit", sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: var(--muted);
+  }
+
+  /* INPUT */
+  .input-line {
+    width: 100%;
+    padding: 6px 0 5px;
+    border: none;
+    border-bottom: 1px solid var(--line-soft);
+    background: transparent;
+    font: 400 15px/1.4 "Inter", sans-serif;
+    color: var(--ink);
+    outline: none;
+  }
+
+  .input-line::placeholder {
+    color: var(--ink);
+    opacity: 0.30;
+  }
+
+  .input-line:focus {
+    border-bottom-color: var(--accent);
+  }
+
+  /* SELECT */
+  .underline-wrap {
+    border-bottom: 1px solid var(--line-soft);
+    padding-bottom: 5px;
+  }
+
+  .underline-wrap.highlight {
+    border-bottom-color: var(--accent);
+  }
+
+  .select-plain {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font: 300 15px/1.4 "Outfit", sans-serif;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    outline: none;
+    appearance: none;
+    cursor: pointer;
+    padding-right: 18px;
+    background-image:
+      linear-gradient(45deg, transparent 50%, var(--ink) 50%),
+      linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+    background-position:
+      right 4px center,
+      right -2px center;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+  }
+
+  /* RESULT */
+  .result-header {
+    margin-top: 28px;
+    font-family: "Outfit", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .result-main {
+    font-family: "Outfit", sans-serif;
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--accent);
+    margin: 6px 0 4px;
+  }
+
+  .result-unit {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 16px;
+  }
+
+  /* DISCLAIMER */
+  .disclaimer {
+    margin-top: 18px;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+
+</style>
+</head>
+
+<body>
+
+<!-- data-nosnippet applied to the entire interactive module -->
+<div class="mini-wrap" data-nosnippet="">
+
+  <div class="mini-title">BUTTER → GRAM CONVERTER</div>
+
+  <div class="mini-instructions">
+    Enter the amount of butter your recipe calls for.
+  </div>
+
+  <div class="label">Amount (recipe amount)</div>
+  <input id="butterAmt" class="input-line" type="text" placeholder="1½ or 1.5">
+
+  <br><br>
+
+  <div class="label">Unit (cups, tbsp, etc.)</div>
+  <div class="underline-wrap" id="unitWrap">
+    <select id="butterUnit" class="select-plain">
+      <option value="" disabled selected></option>
+      <option value="cup">Cup</option>
+      <option value="3/4cup">¾ Cup</option>
+      <option value="1/2cup">½ Cup</option>
+      <option value="1/3cup">⅓ Cup</option>
+      <option value="1/4cup">¼ Cup</option>
+      <option value="tbsp">Tablespoon</option>
+      <option value="tsp">Teaspoon</option>
+    </select>
+  </div>
+
+  <div id="resultBlock" style="display:none;">
+    <div class="result-header">Estimated amount in grams</div>
+    <div class="result-main" id="butterResultNumber">–</div>
+    <div class="result-unit">grams</div>
+  </div>
+
+  <p class="disclaimer">
+    Ingredient values are estimates. Actual weights vary by brand and preparation. Use for general guidance only.
+  </p>
+
+</div>
+
+<script>
+  const BUTTER_GRAMS = {
+    cup: 227,
+    "3/4cup": 170,
+    "1/2cup": 113,
+    "1/3cup": 75.7,
+    "1/4cup": 56.8,
+    tbsp: 14.2,
+    tsp: 4.7
+  };
+
+  function parseFraction(str) {
+    str = (str || "").trim();
+    if (!str) return null;
+
+    let m = str.match(/^(\d+)\s+(\d+)\/(\d+)$/);
+    if (m) return Number(m[1]) + Number(m[2]) / Number(m[3]);
+    m = str.match(/^(\d+)\/(\d+)$/);
+    if (m) return Number(m[1]) / Number(m[2]);
+
+    let num = Number(str);
+    return isNaN(num) ? null : num;
+  }
+
+  function update() {
+    const amtRaw = document.getElementById("butterAmt").value;
+    const unit = document.getElementById("butterUnit").value;
+    const wrap = document.getElementById("unitWrap");
+    const block = document.getElementById("resultBlock");
+    const numEl = document.getElementById("butterResultNumber");
+
+    wrap.classList.toggle("highlight", !!amtRaw && !unit);
+
+    const amount = parseFraction(amtRaw);
+    if (!amount || !unit) {
+      block.style.display = "none";
+      return;
+    }
+
+    const grams = amount * BUTTER_GRAMS[unit];
+    numEl.textContent = grams.toFixed(1).replace(/\.0$/, "");
+    block.style.display = "block";
+  }
+
+  document.getElementById("butterAmt").addEventListener("input", update);
+  document.getElementById("butterUnit").addEventListener("change", update);
+
+  window.addEventListener("load", () => {
+    document.getElementById("butterAmt").focus();
+  });
+</script>
+
+</body>
+</html>
