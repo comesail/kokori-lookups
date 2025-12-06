@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kokori · All-Purpose Flour Weight Lookup</title>
+
+  <meta name="robots" content="nosnippet">
+  <meta name="googlebot" content="nosnippet">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --ink: #22201c;
+      --muted: #4c4740;
+      --line-soft: rgba(0,0,0,0.10);
+      /* accent for flour (can be replaced with your chosen color) */
+      --accent-mustard: #D7B77A;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      position: relative;
+      min-height: 100vh;
+      padding: 56px 0 72px;
+    }
+
+    .tool {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .helper-text {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 28px;
+      max-width: 480px;
+      line-height: 1.6;
+    }
+
+    .label-block {
+      font-family: "Outfit", system-ui, sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .section { margin-bottom: 28px; }
+
+    .table-wrap {
+      border-top: 1px solid var(--line-soft);
+      margin-top: 8px;
+      padding-top: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    thead th {
+      text-align: left;
+      font-weight: 500;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--line-soft);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    tbody td {
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+      font-variant-numeric: tabular-nums;
+    }
+
+    tbody td:last-child {
+      text-align: right;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .notes {
+      margin-top: 10px;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .disclaimer {
+      margin-top: 26px;
+      max-width: 460px;
+      line-height: 1.55;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .kokori-footnote {
+      margin-top: 8px;
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .text-btn {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border: none;
+      background: transparent;
+      padding: 4px 0;
+      color: rgba(215,183,122,0.9);
+      cursor: pointer;
+    }
+
+    .text-btn:hover { color: var(--accent-mustard); }
+
+    .print-row {
+      margin-top: 18px;
+    }
+
+    .kokori-print-footer {
+      display: none;
+      margin-top: 16px;
+      font-size: 10px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.5;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    @media print {
+      .page { padding: 24px 24px 32px; }
+      .print-row { display: none !important; }
+      .kokori-print-footer { display: block; }
+    }
+  </style>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Kokori All-Purpose Flour Weight Lookup",
+    "applicationCategory": "Calculator",
+    "operatingSystem": "Web",
+    "description": "Quick lookup for all-purpose flour weights in grams for common cup and spoon measures.",
+    "softwareVersion": "1.0"
+  }
+  </script>
+</head>
+
+<body>
+<div class="page">
+  <div class="tool" data-nosnippet>
+
+    <div class="helper-text">
+      <strong>All-purpose flour weight guide</strong> shown in cups, grams, tablespoons, and teaspoons.
+    </div>
+
+    <!-- TABLE -->
+    <section class="section table-wrap">
+      <h2 class="label-block">REFERENCE WEIGHTS</h2>
+      <table aria-label="All-purpose flour weight by volume">
+        <thead>
+          <tr>
+            <th scope="col">VOLUME</th>
+            <th scope="col">GRAMS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1 cup</td><td>120 g</td></tr>
+          <tr><td>¾ cup</td><td>90 g</td></tr>
+          <tr><td>½ cup</td><td>60 g</td></tr>
+          <tr><td>⅓ cup</td><td>40 g</td></tr>
+          <tr><td>¼ cup</td><td>30 g</td></tr>
+          <tr><td>1 tablespoon</td><td>7.5 g</td></tr>
+          <tr><td>1 teaspoon</td><td>2.5 g</td></tr>
+        </tbody>
+      </table>
+
+      <div class="notes">
+        Values reflect standard all-purpose flour measurements based on King Arthur Baking reference data.
+      </div>
+    </section>
+
+    <!-- DISCLAIMER -->
+    <p class="disclaimer">
+      Ingredient weights vary naturally by brand, moisture content, and measurement technique.
+      Kokori lookup values represent typical ingredient weights reported across standard baking
+      references and internal measurements. They are provided for informational use only.
+    </p>
+    <div class="kokori-footnote">© 2025 KOKORI. ALL RIGHTS RESERVED.</div>
+
+    <!-- PRINT -->
+    <div class="print-row">
+      <button class="text-btn" id="printBtn">PRINT</button>
+    </div>
+
+    <div class="kokori-print-footer">
+      Kokori · All-Purpose Flour Weight Lookup<br>
+      © 2025 KOKORI. ALL RIGHTS RESERVED.
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const printBtn = document.getElementById("printBtn");
+  if (printBtn) {
+    printBtn.addEventListener("click", () => window.print());
+  }
+</script>
+
+</body>
+</html>
